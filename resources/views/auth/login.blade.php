@@ -2,7 +2,7 @@
 
 @section('content')
 
-{!! Form::open() !!}
+{!! Form::open([]) !!}
 
 <p>AtlasSNSへようこそ</p>
 
@@ -16,5 +16,10 @@
 <p><a href="/register">新規ユーザーの方はこちら</a></p>
 
 {!! Form::close() !!}
+
+<?php//ログイン処理部分
+
+
+?>
 
 @endsection
