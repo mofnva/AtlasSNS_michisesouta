@@ -41,7 +41,7 @@ class LoginController extends Controller
 
     public function login(Request $request){//メソッドインジェクション
         if($request->isMethod('post')){//POST通信でデータが送られてきたら
-            $data = $request;
+            $data = [$_POST("mail"),$_POST("password")];
             // ログインが成功したら、トップページへ
             //↓ログイン条件は公開時には消すこと
             if(Auth::attempt($data)){
