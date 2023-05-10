@@ -43,12 +43,10 @@ class LoginController extends Controller
         if($request->isMethod('post')){//POST通信でデータが送られてきたら
             $data = $request->only('mail,password');
             // ログインが成功したら、トップページへ
-            var_dump($data);
+            //var_dump($data);
             //↓ログイン条件は公開時には消すこと
-            var_dump(Auth::attempt($data));
+            //var_dump(Auth::attempt($data));
             if(Auth::attempt($data)){
-                var_dump("if ok");
-                die;
                 return redirect('/top');
             }
         }
