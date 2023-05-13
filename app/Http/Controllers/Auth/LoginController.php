@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
 
+
 class LoginController extends Controller
 {
     /*
@@ -41,7 +42,7 @@ class LoginController extends Controller
 
     public function login(Request $request){//メソッドインジェクション
         if($request->isMethod('post')){//POST通信でデータが送られてきたら
-            $data = $request->only('mail,password');
+            $data = $request->only('mail','password');
             // ログインが成功したら、トップページへ
             //var_dump($data);
             //↓ログイン条件は公開時には消すこと
@@ -50,6 +51,10 @@ class LoginController extends Controller
                 return redirect('/top');
             }
         }
+        return view("auth.login");
+    }
+    public function logout(Request $request){
+        Auth::logout();
         return view("auth.login");
     }
 }
