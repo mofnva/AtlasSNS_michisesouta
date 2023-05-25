@@ -13,7 +13,14 @@
 
 <?php
 try{
-    foreach($searchResult as $resultobj){
+  if($searchResult!=null){
+    echo "<br>";
+    echo "<div>
+    <p>検索ワード：".$searchResult[count($searchResult)-1]."</p>
+   </div>
+   <br>";
+    for($cnt=0;$cnt!=count($searchResult);$cnt=$cnt+1){
+      $resultobj=$searchResult[$cnt];
       $resultarr = (array)$resultobj;
       echo "<div>
       <img src=".$resultarr['images']."alt=\"ユーザー画像\".></img>
@@ -21,6 +28,7 @@ try{
       </div>
       <br>";
     };
+  }
 }catch(exception $e){};
 ?>
 @endsection

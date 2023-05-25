@@ -2,25 +2,46 @@
 
 @section('content')
 
-{!! Form::open(['url'=>'/profile])!!}
+<?php
+  try {
+    $profarr = (array)$userProfile[0];
+  } catch (exception $e) {
+  }
+?>
 
-{{ Form::label('ユーザー名') }}
-{{ Form::text('newUsername',null,['class' => 'input','required','maxlength'=>255,'minlength'=>1]) }}
+{!! Form::open(['url'=>'/profile'])!!}
 
-{{ Form::label('メールアドレス') }}
-{{ Form::text('newMail',null,['class' => 'input','required','maxlength'=>255,'minlength'=>1]) }}
+{{ Form::label('ユーザー名を変更') }}
+{{ Form::text('newUsername',$profarr['username'],['class' => 'input','required','maxlength'=>255,'minlength'=>1]) }}
+
+<br>
+
+{{ Form::label('新しいメールアドレス') }}
+{{ Form::text('newMail',$profarr['mail'],['class' => 'input','required','maxlength'=>255,'minlength'=>1]) }}
+
+<br>
 
 {{ Form::label('新しいパスワード') }}
-{{ Form::text('newPassword',null,['class' => 'input','required','maxlength'=>255,'minlength'=>1]) }}
+{{ Form::password('newPassword',null,['required','maxlength'=>255,'minlength'=>1]) }}
+
+<br>
 
 {{ Form::label('自己紹介文を編集') }}
-{{ Form::text('newBio',null,['class' => 'input','required','maxlength'=>400]) }}
+{{ Form::text('newBio',$profarr['bio'],['class' => 'input','required','maxlength'=>400]) }}
 
+<br>
 
+{{ Form::label('プロフィール画像を選択') }}
+{{ Form::file('newIcon',[]) }}
 
-{{ Form::submit('検索') }}
+<br>
+
+{{ Form::submit('変更を適用') }}
 
 {!! Form::close() !!}
 
+<?php
+  //var_dump(auth::users);
+?>
 
 @endsection
