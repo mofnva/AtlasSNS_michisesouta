@@ -12,22 +12,27 @@
 {!! Form::open(['url'=>'/profile'])!!}
 
 {{ Form::label('ユーザー名を変更') }}
-{{ Form::text('newUsername',$profarr['username'],['class' => 'input','required','maxlength'=>255,'minlength'=>1]) }}
+{{ Form::text('newUsername',$profarr['username'],['class' => 'input','required','maxlength'=>12,'minlength'=>2]) }}
 
 <br>
 
 {{ Form::label('新しいメールアドレス') }}
-{{ Form::text('newMail',$profarr['mail'],['class' => 'input','required','maxlength'=>255,'minlength'=>1]) }}
+{{ Form::text('newMail',$profarr['mail'],['class' => 'input','required','maxlength'=>40,'minlength'=>5]) }}
 
 <br>
 
 {{ Form::label('新しいパスワード') }}
-{{ Form::password('newPassword',null,['required','maxlength'=>255,'minlength'=>1]) }}
+{{ Form::password('newPassword',null,['required','maxlength'=>20,'minlength'=>8]) }}
+
+<br>
+
+{{ Form::label('パスワードを確認') }}
+{{ Form::password('newPassword',null,['required','maxlength'=>20,'minlength'=>8]) }}
 
 <br>
 
 {{ Form::label('自己紹介文を編集') }}
-{{ Form::text('newBio',$profarr['bio'],['class' => 'input','required','maxlength'=>400]) }}
+{{ Form::text('newBio',$profarr['bio'],['class' => 'input','maxlength'=>150]) }}
 
 <br>
 

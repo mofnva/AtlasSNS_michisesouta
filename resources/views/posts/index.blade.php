@@ -12,8 +12,31 @@
 
 {!! Form::close() !!}
 
-<!--<form action="" method="POST">投稿フォーム URLが空なので自身に送信される(<a>と同じ仕様)ただしルーティングでPostsControllerに行く
-  <input type="text" name="postText" required maxlength=150 minlength=1>
-  <input type="submit">
-</form><稿フォームおわり-->
+<br>
+
+<?php
+  for($cnt=0;$cnt!=count($viewPosts);$cnt=$cnt+1){
+      $postobj=$viewPosts[$cnt];
+      $postarr = (array)$postobj;
+      echo "<div>
+      <p>".$postarr['post']."</p>";
+      if($postarr['user_id'] == Auth::id()){
+
+        echo "<form action=\"/delete\"method=\"post\" name=\"delete".$postarr['id']."\">
+          <script>
+          function delete".$postarr['id']."(){confirm(\"本当に削除しますか？\");
+          }
+          </script>
+          "?>
+        @csrf
+        <?php
+        echo "<input type=\"hidden\" value=".$postarr['id']." name=\"deleteId\">
+        <input type=\"submit\" onclick=\"delete".$postarr['id']."()\">
+        </form>";
+      };
+      echo "</div>
+      <br>";
+    };
+?>
+
 @endsection

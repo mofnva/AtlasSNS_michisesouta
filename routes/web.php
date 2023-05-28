@@ -34,6 +34,7 @@ Route::get('/top','PostsController@index');
 Route::post('/top','PostsController@index');
 
 Route::get('/profile','UsersController@profile');
+Route::post('/profile','UsersController@update');
 
 Route::get('/search','UsersController@index');
 Route::post('/search','UsersController@search');
@@ -43,3 +44,5 @@ Route::get('/follower-list','PostsController@index');
 
 Route::get('/logout', 'Auth\LoginController@logout');//追加分
 Route::post('/logout', 'Auth\LoginController@logout');
+
+Route::post('/delete','PostsController@delete');

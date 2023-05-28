@@ -9,10 +9,13 @@ use Illuminate\Http\Request;
 class UsersController extends Controller
 {
     //
-    public function profile(){
+    public function profile(){//ログイン中ユーザーのプロフィールページへ
         $loginid = Auth::id();
         $profileData = DB::select('select username,mail,bio,images from users where id = '.$loginid);
         return view('users.profile',['userProfile'=>$profileData]);
+    }
+    public function update(Request $request){//ログイン中ユーザーのプロフィール編集（未完成）
+        return view('users.profile');
     }
     public function search(Request $request){//検索機能部分
         $searchName = $request->only('searchName');
