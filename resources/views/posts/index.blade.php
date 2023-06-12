@@ -32,11 +32,10 @@
         //<input type=\"submit\" onclick=\"delete".$postarr['id']."()\">
         //</form>";
         ?>
-@for ($cnt=0;$cnt=count($viewPosts);$cnt=$cnt+1)
-{{
-  $postobj=$viewPosts[$cnt];
+@foreach ($viewPosts as $postobj)
+{
       $postarr = (array)$postobj;
-{!! Form::open(['url'=>'/delete' 'method'=>'post'])!!}
+{!! Form::open(['url'=>'/delete', 'method'=>'post'])!!}
 
 {{ Form::label($postarr['post']) }}
 {{ Form::text('searchName',null,['class' => 'input','required','maxlength'=>255,'minlength'=>1]) }}
@@ -45,6 +44,6 @@
 
 {!! Form::close() !!}
 <br>
-}}
+}
 
 @endsection
