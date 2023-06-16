@@ -33,17 +33,21 @@
         //</form>";
         ?>
 @foreach ($viewPosts as $postobj)
-{
+  @php
       $postarr = (array)$postobj;
-{!! Form::open(['url'=>'/delete', 'method'=>'post'])!!}
+      $loginUserId = Auth::id();
+  @endphp
+  @if($loginUserId == $postarr['user_id'])
+    {!! Form::open(['url'=>'/delete', 'method'=>'post','onsubmit'=>'return confirm (\'本当に削除しますか？\')'])!!}
+    {{ Form::label($postarr['post']) }}
+    {{Form::hidden('deleteId',$postarr['id'],['class'=>'input'])}}
 
-{{ Form::label($postarr['post']) }}
-{{ Form::text('searchName',null,['class' => 'input','required','maxlength'=>255,'minlength'=>1]) }}
+    {{ Form::submit('削除') }}
 
-{{ Form::submit('検索') }}
+    {!! Form::close() !!}
+    <br>
+  @endif
+@endforeach
 
-{!! Form::close() !!}
-<br>
-}
 
 @endsection

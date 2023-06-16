@@ -24,7 +24,7 @@ class PostsController extends Controller
         $deleteId = (int)
         $request['deleteId'];
         DB::table('posts')->where('id',$deleteId)->delete();
-        var_dump($deleteId);
+        //var_dump($deleteId);
 
         $postsData = DB::select('select id,user_id,post,created_at from posts order by created_at desc');//フォロー機能ができたらここの条件を変える
         return view('posts.index',['viewPosts'=>$postsData]);
