@@ -48,4 +48,4 @@ Route::post('/logout', 'Auth\LoginController@logout');
 Route::post('/delete','PostsController@delete');
 
 Route::post('/follow','FollowsController@follow');
-Route::post('/unfollow','FollowsController@follow');
+Route::post('/unfollow','FollowsController@unfollow');
