@@ -20,7 +20,14 @@ class UsersController extends Controller
     public function search(Request $request){//検索機能部分
         $searchName = $request->only('searchName');
         $searchdat = $searchName['searchName'];
-        $result = DB::select('select images,username from users where username like "%'.$searchdat.'%"');
+        $result = DB::select('select id,images,username from users where username like "%'.$searchdat.'%"');
+        $checkerCnt = 1;
+        foreach($result as $followCheckerObj){
+            $followCheckerArr = (array)$followCheckerObj;
+            if($checkerCnt == 0){
+                $followChecked =array($followCheckerArr['']);
+            };
+        };
         //$searchViewData =['searchResult'=>$result,'searchWord'=>$searchdat];
         $result[] = $searchdat;
         return view('users.search',['searchResult' => $result]);

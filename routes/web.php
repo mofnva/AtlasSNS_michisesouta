@@ -46,3 +46,6 @@ Route::get('/logout', 'Auth\LoginController@logout');//追加分
 Route::post('/logout', 'Auth\LoginController@logout');
 
 Route::post('/delete','PostsController@delete');
+
+Route::post('/follow','FollowsController@follow');
+Route::post('/unfollow','FollowsController@follow');

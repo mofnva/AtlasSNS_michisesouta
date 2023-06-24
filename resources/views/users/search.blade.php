@@ -13,6 +13,7 @@
 
 <?php
 try{
+  $loginId = Auth::id();
   if($searchResult!=null){
     echo "<br>";
     echo "<div>
@@ -25,8 +26,25 @@ try{
       echo "<div>
       <img src=".$resultarr['images']."alt=\"ユーザー画像\".></img>
       <p>".$resultarr['username']."</p>
-      </div>
-      <br>";
+      </div>";
+      //if()
+      echo "<form action=\"/follow\" method=\"POST\">
+      <input type=\"hidden\" name=\"_token\" value=". csrf_token() . ">
+      <input type=\"hidden\" name=\"followId\" value=\"".$resultarr['id']."\">
+      <input type=\"hidden\" name=\"loginId\" value=\"".$loginId."\">
+      <input type=\"submit\" value=\"フォローする\">
+      </form>
+      ";
+      //ifelse
+      echo "<form action=\"/unfollow\" method=\"POST\">
+      <input type=\"hidden\" name=\"_token\" value=" . csrf_token() . ">
+      <input type=\"hidden\" name=\"followId\" value=\"".$resultarr['id']."\">
+      <input type=\"hidden\" name=\"loginId\" value=\"".$loginId."\">
+      <input type=\"submit\" value=\"フォロー解除\">
+      </form>
+      ";
+      //if閉じ
+      echo "<br>";
     };
   }
 }catch(exception $e){};

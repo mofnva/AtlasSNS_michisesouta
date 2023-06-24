@@ -37,16 +37,17 @@
       $postarr = (array)$postobj;
       $loginUserId = Auth::id();
   @endphp
-  @if($loginUserId == $postarr['user_id'])
+
     {!! Form::open(['url'=>'/delete', 'method'=>'post','onsubmit'=>'return confirm (\'本当に削除しますか？\')'])!!}
     {{ Form::label($postarr['post']) }}
-    {{Form::hidden('deleteId',$postarr['id'],['class'=>'input'])}}
-
-    {{ Form::submit('削除') }}
+    @if($loginUserId == $postarr['user_id'])
+      {{Form::hidden('deleteId',$postarr['id'],['class'=>'input'])}}
+      {{ Form::submit('削除') }}
+    @endif
 
     {!! Form::close() !!}
     <br>
-  @endif
+
 @endforeach
 
 
