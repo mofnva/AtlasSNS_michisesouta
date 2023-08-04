@@ -32,9 +32,12 @@
         //<input type=\"submit\" onclick=\"delete".$postarr['id']."()\">
         //</form>";
         ?>
+        <?php
+        //var_dump($viewPosts);
+        ?>
 @foreach ($viewPosts as $postobj)
   @php
-      $postarr = (array)$postobj;
+      $postarr = $postobj;
       $loginUserId = Auth::id();
   @endphp
 

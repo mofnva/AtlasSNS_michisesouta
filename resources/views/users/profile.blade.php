@@ -1,15 +1,22 @@
 @extends('layouts.login')
 
 @section('content')
+{{--@php
+var_dump($userProfile);
+@endphp--}}
 
-<?php
-  try {
-    $profarr = (array)$userProfile[0];
-  } catch (exception $e) {
-  }
-?>
+@php
+    $profarr= [];
+    $profcon = (array)$userProfile['prof'];
+    $profobj = $profcon[0];
+    $profarr =(array)$profobj;
+    $secure = $userProfile['selfprof'];
+    $following = $userProfile['following'];
+    $loginId = $userProfile['myId'];
+@endphp
 
-{!! Form::open(['url'=>'/profile'])!!}
+@if($secure == 1)
+{!! Form::open(['url'=>'/profileUpdate','method'=>'post'])!!}
 
 {{ Form::label('ユーザー名を変更') }}
 {{ Form::text('newUsername',$profarr['username'],['class' => 'input','required','maxlength'=>12,'minlength'=>2]) }}
@@ -45,8 +52,54 @@
 
 {!! Form::close() !!}
 
-<?php
-  //var_dump(auth::users);
-?>
+@else
+
+  @php
+  echo '<div>
+    <img src='.$profarr['images'].' alt="ユーザーの画像">
+    <p>ユーザー名：'.$profarr['username'].'</p>
+    <p>自己紹介：'.$profarr['bio'].'</p>';
+  @endphp
+  @if($following == 1)
+    {!! Form::open(['url'=>'/unfollow','method'=>'post'])!!}
+    {{ Form::hidden('loginId',$loginId)}}
+    {{ Form::hidden('followId',$profarr['id'])}}
+    {{ Form::submit('フォロー解除')}}
+    {!! Form::close()!!}
+  @else
+    {!! Form::open(['url'=>'/follow','method'=>'post'])!!}
+    {{ Form::hidden('loginId',$loginId)}}
+    {{ Form::hidden('followId',$profarr['id'])}}
+    {!! Form::close() !!}
+    {{ Form::submit('フォローする')}}
+  @endif
+  @php
+    echo '</div>';
+
+    $postsobj = $userProfile['posts'];
+    $postsarr = (array)$postsobj;
+    $posts = [];
+  @endphp
+  @foreach ($postsarr as $postcon)
+  @php
+    $posts[] = (array)$postcon;
+  @endphp
+@endforeach
+
+  @foreach($posts as $colpos)
+  @php
+      $postarr = $colpos;
+      $loginUserId = Auth::id();
+  @endphp
+
+    {!! Form::open(['url'=>'/follow-list', 'method'=>'get'])!!}
+    {{ Form::label($colpos['post']) }}
+
+    {!! Form::close() !!}
+    <br>
+@endforeach
+
+
+@endif
 
 @endsection

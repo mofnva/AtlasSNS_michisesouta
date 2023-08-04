@@ -35,12 +35,13 @@ Route::post('/top','PostsController@index');
 
 Route::get('/profile','UsersController@profile');
 Route::post('/profile','UsersController@update');
+Route::post('/profileUpdate','UsersController@update');
 
 Route::get('/search','UsersController@index');
 Route::post('/search','UsersController@search');
 
-Route::get('/follow-list','PostsController@index');
-Route::get('/follower-list','PostsController@index');
+Route::get('/follow-list','PostsController@followlist');
+Route::get('/follower-list','PostsController@followerlist');
 
 Route::get('/logout', 'Auth\LoginController@logout');//追加分
 Route::post('/logout', 'Auth\LoginController@logout');
@@ -49,3 +50,6 @@ Route::post('/delete','PostsController@delete');
 
 Route::post('/follow','FollowsController@follow');
 Route::post('/unfollow','FollowsController@unfollow');
+
+Route::get('/profileOther','UsersController@profileOther');
+Route::post('/profileOther','UsersController@profileOther');
