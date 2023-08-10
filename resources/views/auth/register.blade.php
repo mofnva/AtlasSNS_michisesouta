@@ -13,10 +13,10 @@
 {{ Form::text('mail',null,['class' => 'input','maxlength'=>40,'minlength'=>5]) }}
 
 {{ Form::label('パスワード') }}
-{{ Form::text('password',null,['class' => 'input','maxlength'=>20,'minlength'=>8]) }}
+{{ Form::text('password',null,['class' => 'input','maxlength'=>20,'minlength'=>8,'confirmed']) }}
 
 {{ Form::label('パスワード確認') }}
-{{ Form::text('password-confirm',null,['class' => 'input','maxlength'=>12,'minlength'=>2,'confirmed'=>'password']) }}
+{{ Form::text('password_confirmation',null,['class' => 'input','maxlength'=>20,'minlength'=>8]) }}
 
 {{ Form::submit('登録') }}
 
