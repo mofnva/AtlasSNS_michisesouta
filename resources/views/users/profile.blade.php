@@ -1,9 +1,6 @@
 @extends('layouts.login')
 
 @section('content')
-{{--@php
-var_dump($userProfile);
-@endphp--}}
 
 @php
     $profarr= [];
@@ -34,7 +31,7 @@ var_dump($userProfile);
 <br>
 
 {{ Form::label('パスワードを確認') }}
-{{ Form::password('newPassword',null,['required','maxlength'=>20,'minlength'=>8]) }}
+{{ Form::password('newPassword_confirmation',null,['required','maxlength'=>20,'minlength'=>8]) }}
 
 <br>
 

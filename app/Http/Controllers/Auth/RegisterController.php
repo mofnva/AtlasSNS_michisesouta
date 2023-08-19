@@ -77,8 +77,12 @@ class RegisterController extends Controller
 
     public function register(Request $request){
         if($request->isMethod('post')){
-            $bal= $request->only('username','mail','password','password-confirm');
-            //if($bal['']){
+            $bal= $request->only('password','password-confirmation');
+            $request->validate([
+                'password'=>['required','confirmed'],
+                'password_confirmation'=>['required']
+            ]);
+
             $data = $request->input();
             $name = $request->only('username');
             $this->create($data);

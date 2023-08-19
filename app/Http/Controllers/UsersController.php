@@ -19,8 +19,27 @@ class UsersController extends Controller
         return view('users.profile',['userProfile'=>$dat]);
     }
     public function update(Request $request){//ログイン中ユーザーのプロフィール編集（未完成）
-
-        return view('users.profile');
+        $newData = $request->only('newUsername','newMail','newPassword','newPassword-confirmation','newBio','newIcon');
+            $request->validate([
+                'newPassword'=>['required','confirmed'],
+                'newPassword_confirmation'=>['required']
+            ]);
+        $pass =DB::select('select password from users where id ='.Auth::id().'');
+        #データを書き換える部分
+            $kari=DB::update('update users set
+            username=\''.$newData['newUsername'].'\',
+            mail=\''.$newData['newMail'].'\',
+            password=\''.$newData['newPassword'].'\',
+            bio=\''.$newData['newBio'].'\'
+             where id ='.Auth::id().'');
+            #ここから下は/profileと同じ内容
+        $loginid = Auth::id();
+        $profileData = DB::select('select username,mail,bio,images from users where id = '.$loginid);
+        $dat['prof'] = (array)$profileData;
+        $dat['selfprof'] = 1;
+        $dat['following'] = 0;
+        $dat['myId'] = Auth::id();
+        return view('users.profile',['userProfile'=>$dat]);
     }
     public function search(Request $request){//検索機能部分
         $searchName = $request->only('searchName');
