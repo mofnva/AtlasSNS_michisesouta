@@ -29,7 +29,7 @@ class UsersController extends Controller
             $kari=DB::update('update users set
             username=\''.$newData['newUsername'].'\',
             mail=\''.$newData['newMail'].'\',
-            password=\''.Hash::make($newData['newPassword']).'\',
+            password=\''.bcrypt($newData['newPassword']).'\',
             bio=\''.$newData['newBio'].'\'
              where id ='.Auth::id().'');
             #ここから下は/profileと同じ内容
