@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 
@@ -21,15 +22,14 @@ class UsersController extends Controller
     public function update(Request $request){//ログイン中ユーザーのプロフィール編集（未完成）
         $newData = $request->only('newUsername','newMail','newPassword','newPassword-confirmation','newBio','newIcon');
             $request->validate([
-                'newPassword'=>['required','confirmed'],
-                'newPassword_confirmation'=>['required']
+                'newPassword'=>['confirmed']
             ]);
         $pass =DB::select('select password from users where id ='.Auth::id().'');
         #データを書き換える部分
             $kari=DB::update('update users set
             username=\''.$newData['newUsername'].'\',
             mail=\''.$newData['newMail'].'\',
-            password=\''.$newData['newPassword'].'\',
+            password=\''.Hash::make($newData['newPassword']).'\',
             bio=\''.$newData['newBio'].'\'
              where id ='.Auth::id().'');
             #ここから下は/profileと同じ内容
