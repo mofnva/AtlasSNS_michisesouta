@@ -17,6 +17,12 @@ class UsersController extends Controller
         $dat['selfprof'] = 1;
         $dat['following'] = 0;
         $dat['myId'] = Auth::id();
+        //フォロワー数取得データ（共通）
+        $counter = DB::select('select id from follows where following_id = '.Auth::id().'');
+        $dat['follows']=count($counter);
+        $counter = DB::select('select id from follows where followed_id = '.Auth::id().'');
+        $dat['followed']=count($counter);
+        //共通部分ここまで
         return view('users.profile',['userProfile'=>$dat]);
     }
     public function update(Request $request){//ログイン中ユーザーのプロフィール編集（未完成）
@@ -33,6 +39,11 @@ class UsersController extends Controller
             bio=\''.$newData['newBio'].'\'
              where id ='.Auth::id().'');
             #ここから下は/profileと同じ内容
+            //フォロワー数表示の機能
+        $counter = DB::select('select id from follows where following_id = '.Auth::id().'');
+        $dat['follows']=count($counter);
+        $counter = DB::select('select id from follows where followed_id = '.Auth::id().'');
+        $dat['followed']=count($counter);
         $loginid = Auth::id();
         $profileData = DB::select('select username,mail,bio,images from users where id = '.$loginid);
         $dat['prof'] = (array)$profileData;
@@ -42,6 +53,7 @@ class UsersController extends Controller
         return view('users.profile',['userProfile'=>$dat]);
     }
     public function search(Request $request){//検索機能部分
+    if($request->isMethod('post')){
         $searchName = $request->only('searchName');
         $searchdat = $searchName['searchName'];
         $result = DB::select('select id,images,username from users where username like "%'.$searchdat.'%"');
@@ -70,10 +82,20 @@ class UsersController extends Controller
         //$searchViewData =['searchResult'=>$result,'searchWord'=>$searchdat];
         $result[] = $searchdat;
         $result[] = $followings;
+        //フォロワー数表示の機能
+        $counter = DB::select('select id from follows where following_id = '.Auth::id().'');
+        $result['follows']=count($counter);
+        $counter = DB::select('select id from follows where followed_id = '.Auth::id().'');
+        $result['followed']=count($counter);
+        return view('users.search',['searchResult' => $result]);
+    }else {
+         //フォロワー数表示の機能
+        $counter = DB::select('select id from follows where following_id = '.Auth::id().'');
+        $result['follows']=count($counter);
+        $counter = DB::select('select id from follows where followed_id = '.Auth::id().'');
+        $result['followed']=count($counter);
         return view('users.search',['searchResult' => $result]);
     }
-    public function index(){
-        return view('users.search');
     }
 
     public function profileOther(Request $request){
@@ -89,6 +111,11 @@ class UsersController extends Controller
             $posarr = (array)$obj;
         $dat['posts'] = $posarr;
         $dat['myId'] = Auth::id();
+        //フォロワー数表示の機能
+        $counter = DB::select('select id from follows where following_id = '.Auth::id().'');
+        $dat['follows']=count($counter);
+        $counter = DB::select('select id from follows where followed_id = '.Auth::id().'');
+        $dat['followed']=count($counter);
         return view('users.profile',['userProfile'=>$dat]);
     }
 

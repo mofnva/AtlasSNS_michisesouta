@@ -12,6 +12,13 @@
     $loginId = $userProfile['myId'];
 @endphp
 
+      @php
+        $followscnt = $userProfile['follows'];
+        $followedcnt = $userProfile['followed'];
+          unset($userProfile['follows']);
+          unset($userProfile['followed']);
+        @endphp
+
 @if($secure == 1)
 {!! Form::open(['url'=>'/profileUpdate','method'=>'post'])!!}
 

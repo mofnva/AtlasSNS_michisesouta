@@ -27,6 +27,12 @@ class PostsController extends Controller
 
             };
         };
+        //フォロワー数表示の機能
+        $counter = DB::select('select id from follows where following_id = '.Auth::id().'');
+        $postsData['follows']=count($counter);
+        $counter = DB::select('select id from follows where followed_id = '.Auth::id().'');
+        $postsData['followed']=count($counter);
+
         return view('posts.index',['viewPosts'=>$postsData]);
         //表示データ送信ここまで
     }
@@ -36,7 +42,12 @@ class PostsController extends Controller
         DB::table('posts')->where('id',$deleteId)->delete();
         //var_dump($deleteId);
 
-        $postsData = DB::select('select id,user_id,post,created_at from posts order by created_at desc');//フォロー機能ができたらここの条件を変える
+        $postsData = DB::select('select id,user_id,post,created_at from posts order by created_at desc');
+        //フォロワー数表示の機能
+        $counter = DB::select('select id from follows where following_id = '.Auth::id().'');
+        $postsData['follows']=count($counter);
+        $counter = DB::select('select id from follows where followed_id = '.Auth::id().'');
+        $postsData['followed']=count($counter);
         return view('posts.index',['viewPosts'=>$postsData]);
     }
 
@@ -57,6 +68,11 @@ class PostsController extends Controller
             $profImages[] = $imgarr;
         };
         $postsData[] = $profImages;
+        //フォロワー数表示の機能
+        $counter = DB::select('select id from follows where following_id = '.Auth::id().'');
+        $postsData['follows']=count($counter);
+        $counter = DB::select('select id from follows where followed_id = '.Auth::id().'');
+        $postsData['followed']=count($counter);
         return view('follows.followlist',['viewPosts'=>$postsData]);
         //表示データ送信ここまで
     }
@@ -78,6 +94,11 @@ class PostsController extends Controller
             $profImages[] = $imgarr;
         };
         $postsData[] = $profImages;
+        //フォロワー数表示の機能
+        $counter = DB::select('select id from follows where following_id = '.Auth::id().'');
+        $postsData['follows']=count($counter);
+        $counter = DB::select('select id from follows where followed_id = '.Auth::id().'');
+        $postsData['followed']=count($counter);
         return view('follows.followerlist',['viewPosts'=>$postsData]);
         //表示データ送信ここまで
     }

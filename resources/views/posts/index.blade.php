@@ -35,21 +35,25 @@
         <?php
         //var_dump($viewPosts);
         ?>
+        @php
+        $followscnt = $viewPosts['follows'];
+        $followedcnt = $viewPosts['followed'];
+          unset($viewPosts['follows']);
+          unset($viewPosts['followed']);
+        @endphp
 @foreach ($viewPosts as $postobj)
   @php
+      $postarr = [];
       $postarr = $postobj;
       $loginUserId = Auth::id();
   @endphp
-
     {!! Form::open(['url'=>'/delete', 'method'=>'post','onsubmit'=>'return confirm (\'本当に削除しますか？\')'])!!}
     {{ Form::label($postarr['post']) }}
     @if($loginUserId == $postarr['user_id'])
       {{Form::hidden('deleteId',$postarr['id'],['class'=>'input'])}}
       {{ Form::submit('削除') }}
     @endif
-
     {!! Form::close() !!}
-    <br>
 
 @endforeach
 

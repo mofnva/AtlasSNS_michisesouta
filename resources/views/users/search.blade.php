@@ -11,6 +11,13 @@
 
 {!! Form::close() !!}
 
+@php
+        $followscnt = $searchResult['follows'];
+        $followedcnt = $searchResult['followed'];
+          unset($searchResult['follows']);
+          unset($searchResult['followed']);
+        @endphp
+
 <?php
 try{
   $loginId = Auth::id();

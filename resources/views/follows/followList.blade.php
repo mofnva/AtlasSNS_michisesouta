@@ -6,7 +6,12 @@
 echo '<p>フォローリスト</p>
 <br>';
 ?>
-
+@php
+        $followscnt = $viewPosts['follows'];
+        $followedcnt = $viewPosts['followed'];
+          unset($viewPosts['follows']);
+          unset($viewPosts['followed']);
+        @endphp
 @foreach ($viewPosts[count($viewPosts)-1] as $imgNameobj)
   @php
     $imgNameArr = (array)$imgNameobj;

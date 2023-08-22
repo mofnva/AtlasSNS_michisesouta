@@ -44,12 +44,18 @@
                 <p>〇〇さんの</p>
                 <div>
                 <p>フォロー数</p>
-                <p>〇〇名</p>
+                <!--<p>〇〇名</p>-->
+                @php
+                    echo '<p>'.$followscnt.'名</p>';
+                @endphp
                 </div>
                 <p class="btn"><a href="/follow-list">フォローリスト</a></p>
                 <div>
                 <p>フォロワー数</p>
-                <p>〇〇名</p>
+                <!--<p>〇〇名</p>-->
+                @php
+                    echo '<p>'.$followedcnt.'名</p>';
+                @endphp
                 </div>
                 <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
             </div>
