@@ -8,6 +8,7 @@
     <title></title>
     <link rel="stylesheet" href="{{ asset('css/reset.css') }} ">
     <link rel="stylesheet" href="{{ asset('css/style.css') }} ">
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!--サイトのアイコン指定-->
@@ -23,7 +24,10 @@
     <header>
         <div id = "head">
         <h1><a><img src="images/logo.png" href="/top"></a></h1>
-            <div id="">
+            <button id="menubutton" class="closed">
+                ↓
+            </button>
+            <div id="topmenu" class="hidden">
                 <div id="">
                     <p>〇〇さん<img src="images/arrow.png"></p>
                 <div>
@@ -67,4 +71,5 @@
     <script src="JavaScriptファイルのURL"></script>
     <script src="JavaScriptファイルのURL"></script>
 </body>
+<script src="{{asset('js/script.js')}}"></script>
 </html>
