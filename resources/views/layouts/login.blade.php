@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/reset.css') }} ">
     <link rel="stylesheet" href="{{ asset('css/style.css') }} ">
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{asset('js/script.js')}}" defer></script>
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!--サイトのアイコン指定-->
@@ -71,5 +72,4 @@
     <script src="JavaScriptファイルのURL"></script>
     <script src="JavaScriptファイルのURL"></script>
 </body>
-<script src="{{asset('js/script.js')}}"></script>
 </html>

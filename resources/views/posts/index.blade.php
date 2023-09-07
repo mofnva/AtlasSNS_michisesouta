@@ -40,20 +40,33 @@
         $followedcnt = $viewPosts['followed'];
           unset($viewPosts['follows']);
           unset($viewPosts['followed']);
+          $buttonId=0;
         @endphp
 @foreach ($viewPosts as $postobj)
   @php
       $postarr = [];
       $postarr = $postobj;
       $loginUserId = Auth::id();
-  @endphp
-    {!! Form::open(['url'=>'/delete', 'method'=>'post','onsubmit'=>'return confirm (\'本当に削除しますか？\')'])!!}
-    {{ Form::label($postarr['post']) }}
+
+      echo $postarr['post'];
+      @endphp
     @if($loginUserId == $postarr['user_id'])
-      {{Form::hidden('deleteId',$postarr['id'],['class'=>'input'])}}
-      {{ Form::submit('削除') }}
+        {!! Form::open(['url'=>'/delete', 'method'=>'post','onsubmit'=>'return confirm (\'本当に削除しますか？\')'])!!}
+        {{Form::hidden('deleteId',$postarr['id'],['class'=>'input'])}}
+        {{ Form::submit('削除') }}
+      {!! Form::close() !!}
+
+      {!! Form::open(['url'=>'/postedit','method'=>'post','name'=>$buttonId]) !!}
+      {{ Form::hidden('postId',$postarr['id'],['class'=>'input']) }}
+      {{ Form::hidden('editText',$postarr['post'],['class'=>'input']) }}
+      @php
+     echo '<button class=\'editbutton\' id='.$postarr['id'].'>編集</button>';
+     @endphp
+      {!! Form::close() !!}
+     <br>
     @endif
-    {!! Form::close() !!}
+
+
 
 @endforeach
 

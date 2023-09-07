@@ -53,3 +53,6 @@ Route::post('/unfollow','FollowsController@unfollow');
 
 Route::get('/profileOther','UsersController@profileOther');
 Route::post('/profileOther','UsersController@profileOther');
+
+Route::get('/postedit','PostsController@edit');
+Route::post('/postedit','PostsController@edit');

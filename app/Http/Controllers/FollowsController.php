@@ -23,14 +23,26 @@ class FollowsController extends Controller
         //データ変換まではうまくできてる
         //array tostring がDB操作で出る
         DB::table('follows')->insertGetId(['followed_id'=>$followId,'following_id'=>$loginId]);
-        return view('users.search');
+        //フォロワー数表示の機能
+        $counter = DB::select('select id from follows where following_id = '.Auth::id().'');
+        $postsData['follows']=count($counter);
+        $counter = DB::select('select id from follows where followed_id = '.Auth::id().'');
+        $postsData['followed']=count($counter);
+
+        return view('posts.index',['viewPosts'=>$postsData]);
     }
 
     public function unfollow(Request $request){
         $followId = $request->only('followId');
         $loginId = $request->only('loginId');
         DB::table('follows')->where([['followed_id',$followId],['following_id',$loginId]])->delete();
-        return view('users.search');
+        //フォロワー数表示の機能
+        $counter = DB::select('select id from follows where following_id = '.Auth::id().'');
+        $postsData['follows']=count($counter);
+        $counter = DB::select('select id from follows where followed_id = '.Auth::id().'');
+        $postsData['followed']=count($counter);
+
+        return view('posts.index',['viewPosts'=>$postsData]);
     }
 
 

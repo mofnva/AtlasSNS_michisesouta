@@ -103,5 +103,32 @@ class PostsController extends Controller
         //表示データ送信ここまで
     }
 
+    public function edit(Request $request){
+        //変種機能
+        $postId = $request->only('postId');
+        $editText = $request->only('editText');
+        $updater = DB::table('posts')
+        ->where('id',$postId)
+        ->update(['post'=>$editText]);
+        //投稿表示の機能
+        $postsData = array();
+        $following = DB::select('select followed_id from follows where following_id = '.Auth::id().'' );
+        foreach($following as $folobj){
+            $folarr = (array)$folobj;
+            $obj = DB::select('select id,user_id,post,created_at from posts where user_id = '.$folarr['followed_id'].' order by created_at desc');
+            foreach($obj as $usrposts){
+                $posarr = (array)$usrposts;
+                $postsData[] = $posarr;
+
+            };
+        };
+        //フォロワー数表示の機能
+        $counter = DB::select('select id from follows where following_id = '.Auth::id().'');
+        $postsData['follows']=count($counter);
+        $counter = DB::select('select id from follows where followed_id = '.Auth::id().'');
+        $postsData['followed']=count($counter);
+        return view('posts.index',['viewPosts'=>$postsData]);
+        //表示データ送信ここまで
+    }
 
 }
