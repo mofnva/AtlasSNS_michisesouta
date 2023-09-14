@@ -105,8 +105,9 @@ class PostsController extends Controller
 
     public function edit(Request $request){
         //変種機能
-        $postId = $request->only('postId');
-        $editText = $request->only('editText');
+        $postId = $request->only('editId');
+        $editTextarr = $request->only('postText');
+        $editText = $editTextarr['postText'];
         $updater = DB::table('posts')
         ->where('id',$postId)
         ->update(['post'=>$editText]);

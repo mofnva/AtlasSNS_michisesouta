@@ -55,20 +55,20 @@
         {{Form::hidden('deleteId',$postarr['id'],['class'=>'input'])}}
         {{ Form::submit('削除') }}
       {!! Form::close() !!}
-
-      {!! Form::open(['url'=>'/postedit','method'=>'post','name'=>$buttonId]) !!}
-      {{ Form::hidden('postId',$postarr['id'],['class'=>'input']) }}
-      {{ Form::hidden('editText',$postarr['post'],['class'=>'input']) }}
       @php
-     echo '<button class=\'editbutton\' id='.$postarr['id'].'>編集</button>';
+     echo '<button class=\'editbutton '.$postarr['post'].'\' id='.$postarr['id'].'>編集</button>';
      @endphp
-      {!! Form::close() !!}
+     <br>
      <br>
     @endif
-
-
-
 @endforeach
 
+    <div class='editor hidden'>
+      {!! Form::open(['url'=>'postedit','method'=>'post',]) !!}
+      {{Form::hidden('editId'),['class'=>'input']}}
+      {{form::text('postText','dummy')}}
+      {{Form::submit('保存')}}
+      {!! Form::close()!!}
+    </div>
 
 @endsection

@@ -6,12 +6,15 @@ $('#menubutton').click(function () {
 });
 
 $('.editbutton').click(function () {
-  let editpost = prompt('投稿を編集します');
-  if (editpost !== null) {
-    //ここで押されたボタンを拾ってそのフォームを送信させた
-    let from = this.previousElementSibling;
-    document.form.value = editpost;
-  };
+  //ここで押されたボタンを拾ってそのフォームを送信させた
+  let postid = this.id;
+  let posttext = (this.classList.item(1));
+  $('.editor').toggleClass('hidden');
+  let editordat = document.getElementsByClassName('editor')[0];
+  let textbox = editordat.children[0].children[2];
+  let idbox = editordat.children[0].children[1];
+  textbox.value = posttext;
+  idbox.value = postid;
 
 });
 
