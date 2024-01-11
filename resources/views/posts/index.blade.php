@@ -3,16 +3,15 @@
 @section('content')
 <h2>機能を実装していきましょう。</h2>
 
+<div class="postform">
 {!! Form::open(['url'=>'/top'])!!}
 
 {{ Form::label('つぶやき') }}
-{{ Form::text('postText',null,['class' => 'input','required','maxlength'=>150,'minlength'=>1]) }}
-
-{{ Form::submit('投稿') }}
+{{ Form::text('postText',null,['class' => 'input','required','maxlength'=>150,'minlength'=>1,'placeholder'=>'投稿内容を入力してください']) }}
+{{ Form::image('images/post.png') }}
 
 {!! Form::close() !!}
-
-<br>
+</div>
 
 <?php
  // for($cnt=0;$cnt!=count($viewPosts);$cnt=$cnt+1){
@@ -41,33 +40,57 @@
           unset($viewPosts['follows']);
           unset($viewPosts['followed']);
           $buttonId=0;
+        $loginimg = $viewPosts['headerimg'];
+        unset($viewPosts['headerimg']);
         @endphp
 @foreach ($viewPosts as $postobj)
+<div class="posts">
+  <br>
   @php
       $postarr = [];
       $postarr = $postobj;
       $loginUserId = Auth::id();
-
+    @endphp
+      <div class="postbox">
+    @php
+      echo '<img src=images/'.$postarr['images'].'>';
+    @endphp
+    <div class ="posttexts">
+    @php
+      echo '<p class="bold">'.$postarr['username'].'</p>';
+      echo '<br>';
       echo $postarr['post'];
       @endphp
+         </div>
+         </div>
     @if($loginUserId == $postarr['user_id'])
-        {!! Form::open(['url'=>'/delete', 'method'=>'post','onsubmit'=>'return confirm (\'本当に削除しますか？\')'])!!}
+    <div class="buttons">
+      <div class="delbutton">
+        <img src="images/trash.png" alt="">
+        {!! Form::open(['url'=>'/delete', 'method'=>'post','class'=>'hidden','onsubmit'=>'return confirm (\'本当に削除しますか？\')'])!!}
         {{Form::hidden('deleteId',$postarr['id'],['class'=>'input'])}}
-        {{ Form::submit('削除') }}
+        {{ Form::image('images/trash-h.png') }}
       {!! Form::close() !!}
+      </div>
       @php
-     echo '<button class=\'editbutton '.$postarr['post'].'\' id='.$postarr['id'].'>編集</button>';
+      $address = $_SERVER['HTTP_HOST'];
+     echo '<img src="images/edit.png" class=\'editbutton '.$postarr['post'].'\' id='.$postarr['id'].'>';
      @endphp
-     <br>
-     <br>
+         </div>
     @endif
+    <br>
+     </div>
 @endforeach
 
+    <div class='editorback hidden'></div>
     <div class='editor hidden'>
       {!! Form::open(['url'=>'postedit','method'=>'post',]) !!}
       {{Form::hidden('editId'),['class'=>'input']}}
-      {{form::text('postText','dummy')}}
-      {{Form::submit('保存')}}
+      {{form::text('postText','dummy'),['class'=>'textboxedit']}}
+      <div class="brbox"></div>
+      <div class="editorsubmit">
+      {{Form::image('images/edit.png')}}
+      </div>
       {!! Form::close()!!}
     </div>
 

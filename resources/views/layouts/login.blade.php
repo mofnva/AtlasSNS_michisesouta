@@ -24,22 +24,27 @@
 <body>
     <header>
         <div id = "head">
-        <h1><a><img src="images/logo.png" href="/top"></a></h1>
+        <h1><a><img src="images/atlas.png" href="/top"></a></h1>
+        <div  class="rightflexho">
+            @php
+            echo '<img src=images/'.$loginimg.'>';
+            @endphp
             <button id="menubutton" class="closed">
-                ↓
+                V
             </button>
-            <div id="topmenu" class="hidden">
                 <div id="">
-                    <p>〇〇さん<img src="images/arrow.png"></p>
                 <div>
+                <img src="images/arrow.png">
+            </div>
+        </div>
+    </header>
+    <div id="topmenu" class="hidden right">
                 <ul>
                     <li><a href="/top">ホーム</a></li>
                     <li><a href="/profile">プロフィール</a></li>
                     <li><a href="/logout">ログアウト</a></li>
                 </ul>
             </div>
-        </div>
-    </header>
     <div id="row">
         <div id="container">
             @yield('content')
@@ -48,23 +53,29 @@
             <div id="confirm">
                 <p>〇〇さんの</p>
                 <div>
-                <p>フォロー数</p>
-                <!--<p>〇〇名</p>-->
+                <p>フォロー数　　
                 @php
-                    echo '<p>'.$followscnt.'名</p>';
+                    echo $followscnt;
                 @endphp
+                名</p>
                 </div>
+                <div class="right">
                 <p class="btn"><a href="/follow-list">フォローリスト</a></p>
-                <div>
-                <p>フォロワー数</p>
-                <!--<p>〇〇名</p>-->
-                @php
-                    echo '<p>'.$followedcnt.'名</p>';
-                @endphp
                 </div>
+                <div>
+                <p>フォロワー数　
+                @php
+                    echo $followedcnt;
+                @endphp
+                名</p>
+                </div>
+                <div class="right">
                 <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
+</div>
             </div>
+            <div class="center">
             <p class="btn"><a href="/search">ユーザー検索</a></p>
+            </div>
         </div>
     </div>
     <footer>

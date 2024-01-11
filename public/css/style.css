@@ -9,6 +9,46 @@ header {
     background: #186AC9;
 }
 
+#head h1 {
+    height: 100%;
+    left: 10px;
+}
+
+#head {}
+
+.rightflexho {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+}
+
+#menubutton {
+    background: #186AC9;
+}
+
+#topmenu {}
+
+#topmenu ul {
+    background: #FFFFFF;
+    position: fixed;
+    width: 19%;
+    border-left: 3px solid #727272;
+    border-right: 3px solid #727272;
+    border-bottom: 3px solid #727272;
+}
+
+#topmenu li {
+    border-top: 3px solid #727272;
+    display: flex;
+    justify-content: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+#topmenu a {
+    color: #727272;
+}
+
 /* main content */
 #row {
     display: flex;
@@ -19,15 +59,237 @@ header {
     flex: 0 0 80%;
 }
 
+.postform,
+.imgs {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.postform .input {
+    border: 0px;
+    width: 70%;
+    height: 34px;
+    margin-left: 20px;
+}
+
+.postform {
+    border-bottom: 6px solid #727272;
+    margin-bottom: 10px;
+}
+
+.postform form {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.postform [type="image"] {
+    width: 64px;
+    height: 64px;
+}
+
+.posts {
+    padding-left: 40px;
+    border-bottom: 2px solid #727272;
+}
+
+.posts .buttons {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.posts .buttons input[type="image"],
+.buttons img {
+    width: 30px;
+    height: 30px;
+}
+
+.followbutton {
+    background-color: rgba(82, 172, 255, 1);
+    color: white;
+    height: 35px;
+    width: 120px;
+}
+
+.unfollowbutton {
+    background-color: rgba(237, 56, 51, 1);
+    color: white;
+    height: 35px;
+    width: 120px;
+}
+
+.users {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding-left: 30%;
+}
+
+.users img {
+    margin-right: 60px;
+}
+
+.padder {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 50%;
+}
+
+.profbox {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.profbox input {
+    background-color: rgba(239, 239, 239, 1);
+}
+
+.profpadder {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: right;
+    width: 50%;
+}
+
+.profpadder label {
+    margin-right: 60px;
+}
+
+.profpadder input {
+    margin-right: 30%;
+}
+
+.profilechange input {
+    background-color: rgba(237, 56, 51, 1);
+    color: white;
+    height: 35px;
+    width: 120px;
+}
+
+.postbox {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.posttexts {}
+
+/*side-bar*/
 #side-bar {
     flex: 0 0 19%;
     border-left: 1px solid #727272;
+}
+
+#side-bar .btn {
+    margin-right: 7px;
+    margin-bottom: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+#side-bar a {
+    color: white;
+}
+
+.reverse {
+    transform: rotate(180deg);
+}
+
+.btn {
+    background-color: #186AC9;
+    border-radius: 10%;
+    margin-right: 30px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.right {
+    display: flex;
+    justify-content: right;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.width100 {
+    width: 100%;
+}
+
+.buttom {
+    display: flex;
+    align-items: bottom;
+}
+
+#side-bar .center {
+    padding-top: 12px;
+    border-top: 2px solid #727272;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+/*editor*/
+
+.editor {
+    height: 40%;
+    width: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 40%;
+    left: 35%;
+}
+
+.editor form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.editor form [name="postText"] {
+    height: 70%;
+    width: 80%;
+}
+
+.editor form .brbox {
+    width: 70%;
+    height: 0%;
+}
+
+.editorback {
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 70%;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+}
+
+.editorsubmit input {
+    height: 50px;
+    width: 50px;
 }
 
 .hidden {
     display: none;
 }
 
-.reverse {
-    transform: rotate(180deg);
+.container form {
+    justify-content: right;
 }

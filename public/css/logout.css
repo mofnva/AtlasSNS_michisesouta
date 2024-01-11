@@ -1,10 +1,110 @@
 @charset "UTF-8";
 
-html{
+html {
     height: 100%;
 }
 
-body{
+body {
+    width: 100%;
     height: 100%;
-    background: #186AC9;
+    background: linear-gradient(rgba(51, 146, 234), rgba(253, 226, 47, 0.8));
 }
+
+header {
+    justify-content: center;
+    display: flex;
+}
+
+.headerbox {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.headerbox h1 {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+
+.headerbox h1 img {}
+
+header p {
+    color: white;
+    font-size: 30px;
+}
+
+.logoutui {
+    justify-content: center;
+    display: flex;
+}
+
+.formtitle {
+    justify-content: center;
+    display: flex;
+    padding-bottom: 20px;
+}
+
+.formtitle p,
+h2 {
+    color: white;
+}
+
+.logoutui .input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+form,
+.added {
+    width: 30%;
+    height: 70%;
+    background-color: rgba(1, 1, 1, 0.3);
+    justify-content: center;
+    padding: 30px;
+}
+
+form label {
+    color: white;
+}
+
+form input {
+    height: 28px;
+}
+
+.loginbutton {
+    display: flex;
+    justify-content: right;
+}
+
+.loginbutton input,
+.btn {
+    background-color: rgba(237, 58, 80, 1);
+    color: white;
+    height: 35px;
+    width: 120px;
+}
+
+form p {
+    color: white;
+}
+
+.registerbutton {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+a {
+    color: white;
+}
+
+.added p {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center {}

@@ -7,7 +7,7 @@
 {{ Form::label('ユーザー名検索') }}
 {{ Form::text('searchName',null,['class' => 'input','required','maxlength'=>255,'minlength'=>1]) }}
 
-{{ Form::submit('検索') }}
+{{ Form::image('検索') }}
 
 {!! Form::close() !!}
 
@@ -16,6 +16,9 @@
         $followedcnt = $searchResult['followed'];
           unset($searchResult['follows']);
           unset($searchResult['followed']);
+          $buttonId=0;
+        $loginimg = $searchResult['headerimg'];
+        unset($searchResult['headerimg']);
         @endphp
 
 <?php
@@ -33,7 +36,8 @@ try{
     for($cnt=0;$cnt!=count($searchResult)-2;$cnt=$cnt+1){
       $resultobj=$searchResult[$cnt];
       $resultarr = (array)$resultobj;
-      echo "<div>
+      echo "<div class=\"users\">
+      <div class=\"padder\">
       <img src=".$resultarr['images']."alt=\"ユーザー画像\".></img>
       <p>".$resultarr['username']."</p>
       </div>";
@@ -42,17 +46,17 @@ try{
       <input type=\"hidden\" name=\"_token\" value=". csrf_token() . ">
       <input type=\"hidden\" name=\"followId\" value=\"".$resultarr['id']."\">
       <input type=\"hidden\" name=\"loginId\" value=\"".$loginId."\">
-      <input type=\"submit\" value=\"フォローする\">
+      <input class=\"followbutton\" type=\"submit\" value=\"フォローする\">
       </form>
-      ";
+      </div>";
       }else{
       echo "<form action=\"/unfollow\" method=\"POST\">
       <input type=\"hidden\" name=\"_token\" value=" . csrf_token() . ">
       <input type=\"hidden\" name=\"followId\" value=\"".$resultarr['id']."\">
       <input type=\"hidden\" name=\"loginId\" value=\"".$loginId."\">
-      <input type=\"submit\" value=\"フォロー解除\">
+      <input class=\"unfollowbutton\" type=\"submit\" value=\"フォロー解除\">
       </form>
-      ";
+      </div>";
       };
       echo "<br>";
     };

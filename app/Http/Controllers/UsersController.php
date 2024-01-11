@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 class UsersController extends Controller
 {
     //
+
     public function profile(){//ログイン中ユーザーのプロフィールページへ
+        if(Auth::check()){
         $loginid = Auth::id();
         $profileData = DB::select('select username,mail,bio,images from users where id = '.$loginid);
         $dat['prof'] = (array)$profileData;
@@ -22,10 +24,19 @@ class UsersController extends Controller
         $dat['follows']=count($counter);
         $counter = DB::select('select id from follows where followed_id = '.Auth::id().'');
         $dat['followed']=count($counter);
+        #ヘッダー画像の読み込み
+        $kariheaderimg = DB::select('select images from users where id = '.Auth::id().'');
+        $arrheaderimg = (array)$kariheaderimg[0];
+        $headerimg = $arrheaderimg["images"];
+        $dat['headerimg']=$headerimg;
+
         //共通部分ここまで
         return view('users.profile',['userProfile'=>$dat]);
+        }
+        return view('auth.login');
     }
     public function update(Request $request){//ログイン中ユーザーのプロフィール編集（未完成）
+        if(Auth::check()){
         $newData = $request->only('newUsername','newMail','newPassword','newPassword-confirmation','newBio','newIcon');
             $request->validate([
                 'newPassword'=>['confirmed']
@@ -51,8 +62,11 @@ class UsersController extends Controller
         $dat['following'] = 0;
         $dat['myId'] = Auth::id();
         return view('users.profile',['userProfile'=>$dat]);
+        }
+        return view('auth.login');
     }
     public function search(Request $request){//検索機能部分
+        if(Auth::check()){
     if($request->isMethod('post')){
         $searchName = $request->only('searchName');
         $searchdat = $searchName['searchName'];
@@ -87,18 +101,34 @@ class UsersController extends Controller
         $result['follows']=count($counter);
         $counter = DB::select('select id from follows where followed_id = '.Auth::id().'');
         $result['followed']=count($counter);
+        #ヘッダー画像の読み込み
+        $kariheaderimg = DB::select('select images from users where id = '.Auth::id().'');
+        $arrheaderimg = (array)$kariheaderimg[0];
+        $headerimg = $arrheaderimg["images"];
+        $result['headerimg']=$headerimg;
+
         return view('users.search',['searchResult' => $result]);
+
     }else {
          //フォロワー数表示の機能
         $counter = DB::select('select id from follows where following_id = '.Auth::id().'');
         $result['follows']=count($counter);
         $counter = DB::select('select id from follows where followed_id = '.Auth::id().'');
         $result['followed']=count($counter);
+        #ヘッダー画像の読み込み
+        $kariheaderimg = DB::select('select images from users where id = '.Auth::id().'');
+        $arrheaderimg = (array)$kariheaderimg[0];
+        $headerimg = $arrheaderimg["images"];
+        $result['headerimg']=$headerimg;
         return view('users.search',['searchResult' => $result]);
+
     }
+    }
+        return view('auth.login');
     }
 
     public function profileOther(Request $request){
+        if(Auth::check()){
         $loginid = $request->only('id');
         $profileData = DB::select('select id,username,mail,bio,images from users where id = '.$loginid['id'].'');
         $dat['prof'] = (array)$profileData;
@@ -116,7 +146,15 @@ class UsersController extends Controller
         $dat['follows']=count($counter);
         $counter = DB::select('select id from follows where followed_id = '.Auth::id().'');
         $dat['followed']=count($counter);
+        #ヘッダー画像の読み込み
+        $kariheaderimg = DB::select('select images from users where id
+         = '.Auth::id().'');
+        $arrheaderimg = (array)$kariheaderimg[0];
+        $headerimg = $arrheaderimg["images"];
+        $dat['headerimg']=$headerimg;
         return view('users.profile',['userProfile'=>$dat]);
+        }
+        return view('auth.login');
     }
 
 }
