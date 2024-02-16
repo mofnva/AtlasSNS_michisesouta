@@ -3,8 +3,7 @@
 @section('content')
 
 <?php
-echo '<p>フォローリスト</p>
-<br>';
+echo '<p class="listname">Follow List</p>';
 ?>
 @php
         $followscnt = $viewPosts['follows'];
@@ -14,6 +13,8 @@ echo '<p>フォローリスト</p>
           $buttonId=0;
         $loginimg = $viewPosts['headerimg'];
         unset($viewPosts['headerimg']);
+        $selfname = $viewPosts['myname'];
+        unset($viewPosts['myname']);
         @endphp
   <div class="imgs">
 @foreach ($viewPosts[count($viewPosts)-1] as $imgNameobj)

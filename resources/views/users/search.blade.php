@@ -1,7 +1,7 @@
 @extends('layouts.login')
 
 @section('content')
-
+<div class="searchform">
 {!! Form::open(['url'=>'/search'])!!}
 
 {{ Form::label('ユーザー名検索') }}
@@ -10,6 +10,7 @@
 {{ Form::image('検索') }}
 
 {!! Form::close() !!}
+</div>
 
 @php
         $followscnt = $searchResult['follows'];
@@ -19,6 +20,8 @@
           $buttonId=0;
         $loginimg = $searchResult['headerimg'];
         unset($searchResult['headerimg']);
+        $selfname = $searchResult['myname'];
+        unset($searchResult['myname']);
         @endphp
 
 <?php

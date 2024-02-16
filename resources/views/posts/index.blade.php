@@ -1,12 +1,23 @@
 @extends('layouts.login')
 
 @section('content')
-<h2>機能を実装していきましょう。</h2>
-
+@php
+        $followscnt = $viewPosts['follows'];
+        $followedcnt = $viewPosts['followed'];
+          unset($viewPosts['follows']);
+          unset($viewPosts['followed']);
+          $buttonId=0;
+        $loginimg = $viewPosts['headerimg'];
+        unset($viewPosts['headerimg']);
+        $selfname = $viewPosts['myname'];
+        unset($viewPosts['myname']);
+        @endphp
 <div class="postform">
 {!! Form::open(['url'=>'/top'])!!}
 
-{{ Form::label('つぶやき') }}
+@php
+      echo '<img src=images/'.$loginimg.'>';
+    @endphp
 {{ Form::text('postText',null,['class' => 'input','required','maxlength'=>150,'minlength'=>1,'placeholder'=>'投稿内容を入力してください']) }}
 {{ Form::image('images/post.png') }}
 
@@ -34,15 +45,7 @@
         <?php
         //var_dump($viewPosts);
         ?>
-        @php
-        $followscnt = $viewPosts['follows'];
-        $followedcnt = $viewPosts['followed'];
-          unset($viewPosts['follows']);
-          unset($viewPosts['followed']);
-          $buttonId=0;
-        $loginimg = $viewPosts['headerimg'];
-        unset($viewPosts['headerimg']);
-        @endphp
+
 @foreach ($viewPosts as $postobj)
 <div class="posts">
   <br>

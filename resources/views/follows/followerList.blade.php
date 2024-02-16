@@ -3,7 +3,7 @@
 @section('content')
 
 @php
-$textF = '<p>フォロワーリスト</p><br>';
+$textF = '<p class="listname">Follower List</p>';
 echo $textF;
 @endphp
 
@@ -15,6 +15,8 @@ echo $textF;
           $buttonId=0;
         $loginimg = $viewPosts['headerimg'];
         unset($viewPosts['headerimg']);
+        $selfname = $viewPosts['myname'];
+        unset($viewPosts['myname']);
         @endphp
 
         <div class="imgs">

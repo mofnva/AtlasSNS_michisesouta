@@ -79,6 +79,8 @@ class RegisterController extends Controller
         if($request->isMethod('post')){
             $bal= $request->only('password','password-confirmation');
             $request->validate([
+                'username'=>['required'],
+                'mail'=>['required'],
                 'password'=>['required','confirmed'],
                 'password_confirmation'=>['required']
             ]);

@@ -10,6 +10,11 @@
     $secure = $userProfile['selfprof'];
     $following = $userProfile['following'];
     $loginId = $userProfile['myId'];
+    unset($userProfile['prof']);
+    unset($userProfile['selfprof']);
+    unset($userProfile['following']);
+    unset($userProfile['myId']);
+
 @endphp
 
       @php
@@ -19,6 +24,8 @@
           unset($userProfile['followed']);
           $loginimg = $userProfile['headerimg'];
         unset($userProfile['headerimg']);
+        $selfname = $userProfile['myname'];
+        unset($userProfile['myname']);
         @endphp
 
 @if($secure == 1)
@@ -62,7 +69,7 @@
 <div class="profpadder">
 {{ Form::label('プロフィール画像を選択') }}
 </div>
-{{ Form::file('newIcon',[]) }}
+{{ Form::file('newIcon',['class'=>'input']) }}
 </div>
 <br>
 <div class="center width100 profilechange">
@@ -75,47 +82,62 @@
 
   @php
   echo '<div>
-    <img src='.$profarr['images'].' alt="ユーザーの画像">
+    <div class="postform">
+    <div class="otherprofiletop">
+    <img src=images/'.$profarr['images'].' alt="ユーザーの画像">
+    <div class="colomntext">
     <p>ユーザー名：'.$profarr['username'].'</p>
-    <p>自己紹介：'.$profarr['bio'].'</p>';
+    <p>自己紹介：'.$profarr['bio'].'</p>
+</div>
+<div class="vertical-center">';
   @endphp
   @if($following == 1)
     {!! Form::open(['url'=>'/unfollow','method'=>'post'])!!}
     {{ Form::hidden('loginId',$loginId)}}
     {{ Form::hidden('followId',$profarr['id'])}}
-    {{ Form::submit('フォロー解除')}}
+    {{ Form::submit('フォロー解除',['class'=>'unfollowbutton'])}}
     {!! Form::close()!!}
   @else
     {!! Form::open(['url'=>'/follow','method'=>'post'])!!}
     {{ Form::hidden('loginId',$loginId)}}
     {{ Form::hidden('followId',$profarr['id'])}}
     {!! Form::close() !!}
-    {{ Form::submit('フォローする')}}
+    {{ Form::submit('フォローする',['class'=>'followbutton'])}}
   @endif
-  @php
+</div>
+  </div>
+</div>
+
+@php
     echo '</div>';
 
-    $postsobj = $userProfile['posts'];
-    $postsarr = (array)$postsobj;
-    $posts = [];
+    //$postsobj = $userProfile['posts'];
+    //$postsarr = (array)$postsobj;
+    //$posts = [];
   @endphp
-  @foreach ($postsarr as $postcon)
-  @php
-    $posts[] = (array)$postcon;
-  @endphp
-@endforeach
 
-  @foreach($posts as $colpos)
+  @foreach ($userProfile as $postobj)
+<div class="posts">
+  <br>
   @php
-      $postarr = $colpos;
+      $postarr = [];
+      $postarr = $postobj;
       $loginUserId = Auth::id();
-  @endphp
-
-    {!! Form::open(['url'=>'/follow-list', 'method'=>'get'])!!}
-    {{ Form::label($colpos['post']) }}
-
-    {!! Form::close() !!}
+    @endphp
+      <div class="postbox">
+    @php
+      echo '<img src=images/'.$postarr['images'].'>';
+    @endphp
+    <div class ="posttexts">
+    @php
+      echo '<p class="bold">'.$postarr['username'].'</p>';
+      echo '<br>';
+      echo $postarr['post'];
+      @endphp
+         </div>
+         </div>
     <br>
+     </div>
 @endforeach
 
 

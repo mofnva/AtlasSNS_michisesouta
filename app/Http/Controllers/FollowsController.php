@@ -41,6 +41,11 @@ class FollowsController extends Controller
         $arrheaderimg = (array)$kariheaderimg[0];
         $headerimg = $arrheaderimg["images"];
         $postsData['headerimg']=$headerimg;
+        #サイドバーの名前読込
+        $mynamecls=DB::select('select username from users where id = '.Auth::id().'');
+        $myname=(array)$mynamecls[0];
+        $postsData['myname']=$myname;
+
 
         return view('posts.index',['viewPosts'=>$postsData]);
         }
@@ -63,6 +68,11 @@ class FollowsController extends Controller
         $arrheaderimg = (array)$kariheaderimg[0];
         $headerimg = $arrheaderimg["images"];
         $postsData['headerimg']=$headerimg;
+
+        #サイドバーの名前読込
+        $mynamecls=DB::select('select username from users where id = '.Auth::id().'');
+        $myname=(array)$mynamecls[0];
+        $postsData['myname']=$myname;
 
         return view('posts.index',['viewPosts'=>$postsData]);
         }

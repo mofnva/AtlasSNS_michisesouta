@@ -31,6 +31,22 @@ $('.delbutton').hover(function () {
   $(del_h).toggleClass('hidden');
 });
 
+$('.menubutton').hover(function () {
+  $(this).toggleClass('dark');
+})
+
+$('.toplink').click(function () {
+  window.location.href = "/top";
+})
+
+$('.proflink').click(function () {
+  window.location.href = "/profile";
+})
+
+$('.logoutlink').click(function () {
+  window.location.href = "/logout";
+})
+
 class editer {
 
 };

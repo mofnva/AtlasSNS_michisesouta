@@ -22,7 +22,7 @@ class PostsController extends Controller
         $following = DB::select('select followed_id from follows where following_id = '.Auth::id().'' );
         foreach($following as $folobj){
             $folarr = (array)$folobj;
-            $obj = DB::select('select id,user_id,post,created_at from posts where user_id = '.$folarr['followed_id'].' order by created_at desc');
+            $obj = DB::select('select id,user_id,post,created_at from posts where user_id = '.$folarr['followed_id'].' or user_id = '.Auth::id().' order by created_at desc');
             foreach($obj as $usrposts){
                 $posarr = (array)$usrposts;
                 #画像ここから
@@ -50,6 +50,11 @@ class PostsController extends Controller
         $headerimg = $arrheaderimg["images"];
         $postsData['headerimg']=$headerimg;
 
+        #サイドバーの名前読込
+        $mynamecls=DB::select('select username from users where id = '.Auth::id().'');
+        $myname=(array)$mynamecls[0];
+        $postsData['myname']=$myname;
+
         return view('posts.index',['viewPosts'=>$postsData]);
         //表示データ送信ここまで
         }
@@ -75,6 +80,11 @@ class PostsController extends Controller
         $postsData['headerimg']=$headerimg;
         return view('posts.index',['viewPosts'=>$postsData]);
         }
+        #サイドバーの名前読込
+        $mynamecls=DB::select('select username from users where id = '.Auth::id().'');
+        $myname=(array)$mynamecls[0];
+        $postsData['myname']=$myname;
+
         return view('auth.login');
     }
 
@@ -116,6 +126,11 @@ class PostsController extends Controller
         $arrheaderimg = (array)$kariheaderimg[0];
         $headerimg = $arrheaderimg["images"];
         $postsData['headerimg']=$headerimg;
+        #サイドバーの名前読込
+        $mynamecls=DB::select('select username from users where id = '.Auth::id().'');
+        $myname=(array)$mynamecls[0];
+        $postsData['myname']=$myname;
+
         return view('follows.followlist',['viewPosts'=>$postsData]);
         //表示データ送信ここまで
         }
@@ -161,6 +176,11 @@ class PostsController extends Controller
         $arrheaderimg = (array)$kariheaderimg[0];
         $headerimg = $arrheaderimg["images"];
         $postsData['headerimg']=$headerimg;
+        #サイドバーの名前読込
+        $mynamecls=DB::select('select username from users where id = '.Auth::id().'');
+        $myname=(array)$mynamecls[0];
+        $postsData['myname']=$myname;
+
         return view('follows.followerlist',['viewPosts'=>$postsData]);
         //表示データ送信ここまで
         }
@@ -208,6 +228,11 @@ class PostsController extends Controller
         $arrheaderimg = (array)$kariheaderimg[0];
         $headerimg = $arrheaderimg["images"];
         $postsData['headerimg']=$headerimg;
+        #サイドバーの名前読込
+        $mynamecls=DB::select('select username from users where id = '.Auth::id().'');
+        $myname=(array)$mynamecls[0];
+        $postsData['myname']=$myname;
+
         return view('posts.index',['viewPosts'=>$postsData]);
         //表示データ送信ここまで
         }

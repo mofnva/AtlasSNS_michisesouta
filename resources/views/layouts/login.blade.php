@@ -34,15 +34,15 @@
             </button>
                 <div id="">
                 <div>
-                <img src="images/arrow.png">
+                <!--<img src="images/arrow.png">-->
             </div>
         </div>
     </header>
     <div id="topmenu" class="hidden right">
                 <ul>
-                    <li><a href="/top">ホーム</a></li>
-                    <li><a href="/profile">プロフィール</a></li>
-                    <li><a href="/logout">ログアウト</a></li>
+                    <li class="toplink menubutton"><a href="/top">ホーム</a></li>
+                    <li class="proflink menubutton"><a href="/profile">プロフィール</a></li>
+                    <li class="logoutlink menubutton"><a href="/logout">ログアウト</a></li>
                 </ul>
             </div>
     <div id="row">
@@ -51,7 +51,9 @@
         </div >
         <div id="side-bar">
             <div id="confirm">
-                <p>〇〇さんの</p>
+                @php
+                echo "".$selfname['username']."さん";
+                @endphp
                 <div>
                 <p>フォロー数　　
                 @php
