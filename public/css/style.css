@@ -16,6 +16,11 @@ header {
     left: 10px;
 }
 
+#head h1 a img {
+    height: 65px;
+    width: auto;
+}
+
 #head {
     display: flex;
     justify-content: space-between;
@@ -87,12 +92,14 @@ h1 a img {
 
 /* main content */
 #row {
+
     display: flex;
     flex-flow: row wrap;
     height: 100%;
 }
 
 #container {
+    margin-top: 20px;
     flex: 0 0 80%;
 }
 

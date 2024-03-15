@@ -53,8 +53,7 @@ class UsersController extends Controller
             mail=\''.$newData['newMail'].'\',
             password=\''.bcrypt($newData['newPassword']).'\',
             bio=\''.$newData['newBio'].'\',
-            images='.$newData['newIcon'].'\'
-             where id ='.Auth::id().'');
+            images=\''.$newData['newIcon'].'\' where id ='.Auth::id().'');
             #ここから下は/profileと同じ内容
             //フォロワー数表示の機能
         $counter = DB::select('select id from follows where following_id = '.Auth::id().'');
@@ -62,11 +61,16 @@ class UsersController extends Controller
         $counter = DB::select('select id from follows where followed_id = '.Auth::id().'');
         $dat['followed']=count($counter);
         $loginid = Auth::id();
-        $profileData = DB::select('select username,mail,bio,images from users where id = '.$loginid);
+        $profileData = DB::select('select username,mail,bio,images from users where id = '.$loginid.'');
         $dat['prof'] = (array)$profileData;
         $dat['selfprof'] = 1;
         $dat['following'] = 0;
         $dat['myId'] = Auth::id();
+        #ヘッダー画像の読み込み
+        $kariheaderimg = DB::select('select images from users where id = '.Auth::id().'');
+        $arrheaderimg = (array)$kariheaderimg[0];
+        $headerimg = $arrheaderimg["images"];
+        $dat['headerimg']=$headerimg;
         #サイドバーの名前読込
         $mynamecls=DB::select('select username from users where id = '.Auth::id().'');
         $myname=(array)$mynamecls[0];
